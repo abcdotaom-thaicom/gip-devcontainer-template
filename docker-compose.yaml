@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        BASE_IMAGE: tensorflow/tensorflow:2.15.0
+        BASE_IMAGE: tensorflow/tensorflow:2.15.0-gpu
     image: gip-devcontainer-template
     container_name: gip-dev
     working_dir: /workspaces
