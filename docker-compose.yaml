@@ -14,3 +14,10 @@ services:
       - .:/workspaces
       - /var/run/docker.sock:/var/run/docker.sock
     command: bash -l
+    runtime: nvidia  # ✅ สำหรับ Docker ที่ยังรองรับ runtime
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
