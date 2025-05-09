@@ -1,0 +1,16 @@
+{
+  "name": "gip-python310-uv",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspaces",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "git config --global --add safe.directory /workspaces && uv pip list"
+}
