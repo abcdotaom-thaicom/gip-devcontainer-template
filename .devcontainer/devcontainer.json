@@ -12,5 +12,5 @@
     }
   },
   "remoteUser": "vscode",
-  "postCreateCommand": "git config --global --add safe.directory /workspaces && uv pip list"
+  "postCreateCommand": "git config --global --add safe.directory /workspaces && uv pip list && python main.py"
 }
