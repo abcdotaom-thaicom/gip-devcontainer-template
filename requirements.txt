@@ -1,2 +1,3 @@
 Geopandas
+numpy
 torch

@@ -1,20 +1,24 @@
-version: '3.10'
-
 services:
   dev:
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        BASE_IMAGE: tensorflow/tensorflow:2.15.0-gpu
-    image: gip-devcontainer-template
-    container_name: gip-dev
+        USERNAME: ${USER}
+        USER_UID: ${UID}
+        USER_GID: ${GID}
+    image: gip-dev-gpu
+    container_name: gip-dev-${USER}
+    user: "${UID}:${GID}"
     working_dir: /workspaces
     volumes:
       - .:/workspaces
+      - ~/.ssh:/home/${USER}/.ssh:ro
       - /var/run/docker.sock:/var/run/docker.sock
     command: bash -l
-    runtime: nvidia  # ✅ สำหรับ Docker ที่ยังรองรับ runtime
+    stdin_open: true
+    tty: true
+    runtime: nvidia
     deploy:
       resources:
         reservations:
