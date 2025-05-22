@@ -1,20 +1,20 @@
 {
-    "name": "gip-python310-uv",
-    "dockerComposeFile": "../docker-compose.yml",
-    "service": "dev",
-    "workspaceFolder": "/workspaces",
-    "customizations": {
-      "vscode": {
-        "extensions": [
-          "ms-python.python",
-          "ms-toolsai.jupyter"
-        ]
+  "name": "gip-python310-uv",
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "dev",
+  "workspaceFolder": "/workspaces",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/venv/bin/python",
+        "terminal.integrated.defaultProfile.linux": "bash"
       }
-    },
-    "remoteUser": "vscode",
-    // "remoteEnv": {
-    //   "PATH": "/opt/venv/bin:${PATH}"
-    // },
-    "postCreateCommand": "git config --global --add safe.directory /workspaces && /opt/venv/bin/uv pip list && python main.py"
-  }
-  
+    }
+  },
+  "postCreateCommand": "git config --global --add safe.directory /workspaces && git config --global user.name '${USER}' && git config --global user.email '${USER}@yourorg.com' && uv pip list && python -m pip install --upgrade pip"
+}
