@@ -1,0 +1,71 @@
+# =====================
+# Python Bytecode
+# =====================
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+*.dll
+*.dylib
+
+# =====================
+# Virtual Environments
+# =====================
+.venv/
+venv/
+env/
+ENV/
+opt/venv/
+
+# =====================
+# Jupyter Notebook
+# =====================
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# =====================
+# Secrets / Environment
+# =====================
+.env
+.env.*
+*.secret
+secrets/
+
+# =====================
+# Package / Build Output
+# =====================
+pip-wheel-metadata/
+dist/
+build/
+.eggs/
+*.egg-info/
+
+# =====================
+# Docker-related
+# =====================
+*.log
+*.pid
+*.sock
+*.tgz
+*.gz
+*.bak
+*.swp
+
+# =====================
+# OS-generated
+# =====================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =====================
+# VS Code / Devcontainer
+# =====================
+.vscode/
+.devcontainer/*.code-workspace
+
+# =====================
+# GitHub workflows cache (optional)
+# =====================
+.github/.cache/
