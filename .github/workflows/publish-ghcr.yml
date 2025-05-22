@@ -20,9 +20,9 @@ jobs:
       - name: Set image name
         run: |
           if [[ "${GITHUB_REF_NAME}" == *-gpu ]]; then
-            echo "IMAGE_NAME=ghcr.io/thaicomplc/gip-dev-gpu-base" >> $GITHUB_ENV
+            echo "IMAGE_NAME=ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base" >> $GITHUB_ENV
           else
-            echo "IMAGE_NAME=ghcr.io/thaicomplc/gip-dev-cpu-base" >> $GITHUB_ENV
+            echo "IMAGE_NAME=ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base" >> $GITHUB_ENV
           fi
           echo "TAG=${GITHUB_REF_NAME%%-*}" >> $GITHUB_ENV
 
