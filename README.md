@@ -63,13 +63,17 @@ VS Code will use `devcontainer.json` and Docker Compose to set up the environmen
 
 ```
 .
-├── Dockerfile                 # Multi-stage Docker build
-├── docker-compose.yaml        # Service configuration
-├── Makefile                   # Task automation
-├── requirements.txt           # Python package list
-├── .github/workflows/         # CI for GHCR publishing
-├── devcontainer          # DevContainer integration
-└── .gitignore                 # Clean repo hygiene
+├── Dockerfile               # Multi-stage build with GDAL, uv, Python venv
+├── docker-compose.yaml      # Docker Compose service for development
+├── Makefile                 # Developer-friendly automation commands
+├── requirements.txt         # Python dependencies (installed via uv)
+├── .github/
+│   └── workflows/
+│       └── publish-ghcr.yml # CI pipeline to build & publish to GHCR
+├── .devcontainer/
+│   └── devcontainer.json    # VS Code DevContainer configuration
+├── .gitignore               # Git ignore rules
+└── main.py                  # Example script or app entry point
 ```
 
 ---
