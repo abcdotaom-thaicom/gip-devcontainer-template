@@ -8,7 +8,7 @@ services:
         USER_UID: ${UID}
         USER_GID: ${GID}
 
-    image: gip-dev
+    image: ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.1
     container_name: gip-dev-${USER}
     user: "${UID}:${GID}"
     working_dir: /workspaces

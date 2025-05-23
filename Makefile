@@ -5,7 +5,7 @@ USER := $(shell id -un)
 
 export UID GID USER
 
-IMAGE_NAME ?= ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base
+IMAGE_NAME ?= ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.1
 IMAGE_TAG ?= v1
 FULL_IMAGE := $(IMAGE_NAME):$(IMAGE_TAG)
 
