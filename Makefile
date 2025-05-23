@@ -5,35 +5,19 @@ USER := $(shell id -un)
 
 export UID GID USER
 
-# ========== COMMON TASKS ==========
-
-# เข้าสู่ container แบบใช้งานชั่วคราว (ลบทิ้งหลังใช้งาน)
-shell:
-	docker compose run --rm dev
-
-# รัน container แบบ background (อยู่ตลอด session จนกว่าจะสั่ง down เหมาะกับ server หรือ  long-running dev environment เช่น Jupyter, FastAPI server, หรือระบบเบื้องหลัง)
-up:
-	docker compose up -d
-
-# ปิด container ที่รันแบบ background
-down:
-	docker compose down
-
-# สร้าง image ใหม่ทั้งหมด (ไม่มี cache)
-rebuild:
-	docker compose build --no-cache --force-rm
-
-# ปิด container และลบ volume ที่เกี่ยวข้อง (ไม่ลบ image)
-clean:
-	docker compose down --volumes --remove-orphans
-
-# ล้างทุกอย่าง ทั้ง container, image, cache
-deepclean:
-	docker compose down --volumes --remove-orphans
-	docker image prune -f
-	docker builder prune -af
+IMAGE_NAME ?= ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base:v1.0.1
+IMAGE_TAG ?= v1
+FULL_IMAGE := $(IMAGE_NAME):$(IMAGE_TAG)
 
 # ========== UTILITIES ==========
+
+# Pre-built Docker
+ghcr:
+	@echo "📦 Pulling pre-built image from GHCR..."
+	docker pull $(IMAGE_NAME)
+	@echo "✅ Done. Run 'make shell' to start using it."
+
+# ตรวจสอบ container
 status:
 	docker compose ps -a
 
@@ -87,3 +71,31 @@ check-gpu:
 # ดูขนาด disk usage ของ docker system
 disk-usage:
 	docker system df
+
+# ========== COMMON TASKS ==========
+
+# เข้าสู่ container แบบใช้งานชั่วคราว (ลบทิ้งหลังใช้งาน)
+shell:
+	docker compose run --rm dev
+
+# รัน container แบบ background (อยู่ตลอด session จนกว่าจะสั่ง down เหมาะกับ server หรือ  long-running dev environment เช่น Jupyter, FastAPI server, หรือระบบเบื้องหลัง)
+up:
+	docker compose up -d
+
+# ปิด container ที่รันแบบ background
+down:
+	docker compose down
+
+# สร้าง image ใหม่ทั้งหมด (ไม่มี cache)
+rebuild:
+	docker compose build --no-cache --force-rm
+
+# ปิด container และลบ volume ที่เกี่ยวข้อง (ไม่ลบ image)
+clean:
+	docker compose down --volumes --remove-orphans
+
+# ล้างทุกอย่าง ทั้ง container, image, cache
+deepclean:
+	docker compose down --volumes --remove-orphans
+	docker image prune -f
+	docker builder prune -af
