@@ -11,29 +11,29 @@ FULL_IMAGE := $(IMAGE_NAME):$(IMAGE_TAG)
 
 # ========== UTILITIES ==========
 
-# Pre-built Docker
+# Pre-built Docker Image
 ghcr:
 	@echo "📦 Pulling pre-built image from GHCR..."
 	docker pull $(IMAGE_NAME)
 	@echo "✅ Done. Run 'make shell' to start using it."
 
-# ตรวจสอบ container
+# Check container status
 status:
 	docker compose ps -a
 
-# เข้า shell ของ container ที่รันแบบ `up`
-exec:
+# Access the shell of a container that is running with `up`
+shell:
 	docker compose exec dev bash
 
-# ดู log ของ container ที่รันด้วย `up`
+# View the logs of the container running with `up`
 logs:
 	docker compose logs -f --tail=100 dev
 
-# ตรวจสอบว่า python, pip, uv ใช้ได้ไหม
+# Check if python, pip, and uv are working
 check-env:
 	docker compose run --rm dev python -m pip list && docker compose run --rm dev uv pip list
 
-# ตรวจสอบว่าคุณพร้อมรัน Docker จริงไหม (permissions, GPU, etc.)
+# Check if you are ready to run Docker (permissions, GPU, etc.)
 doctor:
 	@echo "Checking environment..."
 	@docker info >/dev/null 2>&1 && echo "✅ Docker daemon is running" || echo "❌ Docker not running"
@@ -41,7 +41,7 @@ doctor:
 	@nvidia-smi >/dev/null 2>&1 && echo "✅ GPU detected: $$(nvidia-smi --query-gpu=name --format=csv,noheader)" || echo "⚠️  No GPU detected"
 	@echo "UID: $(UID), GID: $(GID), USER: $(USER)"
 
-# เข้าใช้งาน container แบบครบวงจร (build → up → bash)
+# Start and use the container completely (build → up → bash)
 start:
 	@if ! docker compose ps -q dev | grep -q .; then \
 		$(MAKE) rebuild && $(MAKE) up; \
@@ -51,50 +51,50 @@ start:
 	@echo "🖥️  Entering shell..."
 	@$(MAKE) exec
 
-# เปิดและเข้าใช้งาน container (up → bash)
+# Start the container and access it (up → bash)
 dev:
 	@$(MAKE) up
 	@echo "🔁 Container started. Entering container shell..."
 	@$(MAKE) exec
 
-# เริ่มต้นเข้าใช้งาน container ใหม่แบบครบวงจร (build → up → bash)
+# Start and use a new container from scratch (build → up → bash)
 restart:
 	@$(MAKE) rebuild
 	@$(MAKE) up
 	@echo "🔁 Container started. Entering container shell..."
 	@$(MAKE) exec
 
-# ดูว่าใช้ GPU ได้ไหม
+# Check if the GPU is available
 check-gpu:
 	docker compose run --rm dev python -c "import tensorflow as tf; print('GPU:', tf.config.list_physical_devices('GPU'))"
 
-# ดูขนาด disk usage ของ docker system
+# View the disk usage of the Docker system
 disk-usage:
 	docker system df
 
 # ========== COMMON TASKS ==========
 
-# เข้าสู่ container แบบใช้งานชั่วคราว (ลบทิ้งหลังใช้งาน)
-shell:
+# Enter the container temporarily (removed after use)
+run:
 	docker compose run --rm dev
 
-# รัน container แบบ background (อยู่ตลอด session จนกว่าจะสั่ง down เหมาะกับ server หรือ  long-running dev environment เช่น Jupyter, FastAPI server, หรือระบบเบื้องหลัง)
+# Run the container in the background (keeps running until 'down' is executed, suitable for long-running dev environments such as Jupyter, FastAPI, or background systems)
 up:
 	docker compose up -d
 
-# ปิด container ที่รันแบบ background
+# Stop the background container
 down:
 	docker compose down
 
-# สร้าง image ใหม่ทั้งหมด (ไม่มี cache)
+# Rebuild the image from scratch (without cache)
 rebuild:
 	docker compose build --no-cache --force-rm
 
-# ปิด container และลบ volume ที่เกี่ยวข้อง (ไม่ลบ image)
+# Stop the container and remove associated volumes (does not remove images)
 clean:
 	docker compose down --volumes --remove-orphans
 
-# ล้างทุกอย่าง ทั้ง container, image, cache
+# Clean everything including containers, images, and cache
 deepclean:
 	docker compose down --volumes --remove-orphans
 	docker image prune -f
