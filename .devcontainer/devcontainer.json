@@ -16,5 +16,5 @@
       }
     }
   },
-  "postCreateCommand": "git config --global --add safe.directory /workspaces && git config --global user.name '${USER}' && git config --global user.email '${USER}@yourorg.com' && uv pip list && python -m pip install --upgrade pip"
+  "postCreateCommand": "bash -c 'git config --global --add safe.directory /workspaces && git config --global user.name \"$(id -un)\" && git config --global user.email \"$(id -un)@thaicom.net\" && uv pip list && python -m pip install --upgrade pip'"
 }

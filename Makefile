@@ -17,6 +17,14 @@ ghcr:
 	docker pull $(IMAGE_NAME)
 	@echo "✅ Done. Run 'make shell' to start using it."
 
+# Generates .env file
+gen-env:
+	@echo "UID=$(shell id -u)" > .env
+	@echo "GID=$(shell id -g)" >> .env
+	@echo "USER=$(shell id -un)" >> .env
+	@echo "✅ .env generated with UID=$(UID), GID=$(GID), USER=$(USER)"
+
+
 # Check container status
 status:
 	docker compose ps -a
@@ -79,7 +87,8 @@ run:
 	docker compose run --rm dev
 
 # Run the container in the background (keeps running until 'down' is executed, suitable for long-running dev environments such as Jupyter, FastAPI, or background systems)
-up:
+up: gen-env
+	@echo "UID=$(UID), GID=$(GID), USER=$(USER)"
 	docker compose up -d
 
 # Stop the background container

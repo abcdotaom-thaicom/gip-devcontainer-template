@@ -1,5 +1,7 @@
 services:
   dev:
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
@@ -16,6 +18,7 @@ services:
       - .:/workspaces
       - ~/.ssh:/home/${USER}/.ssh:ro
       - /var/run/docker.sock:/var/run/docker.sock
+      - /fs5/anawat/sen2cog_poc:/workspaces/data
     command: bash -l
     stdin_open: true
     tty: true
