@@ -131,7 +131,6 @@ with:
 "remoteUser": "Your USER"
 ```
 
-This allows the container to automatically use the current Linux user defined in `.env`
 ---
 
 ## 🚀 Quick Start (Both Variants)
