@@ -47,7 +47,7 @@ This container includes a full Python virtual environment (via `uv`), GDAL compi
 ## 🏗️ Usage (CPU Image)
 
 ```bash
-docker pull ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.1
+docker pull ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.2
 ```
 
 Or run with make:
@@ -81,7 +81,7 @@ A GPU-accelerated development environment tailored for Geospatial Data Science, 
 ## 🏗️ Usage (GPU Image)
 
 ```bash
-docker pull ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base:v1.0.1
+docker pull ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base:v1.0.2
 ```
 
 Or run with make:
