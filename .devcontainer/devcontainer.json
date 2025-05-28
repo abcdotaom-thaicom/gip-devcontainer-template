@@ -3,7 +3,8 @@
   "dockerComposeFile": "../docker-compose.yaml",
   "service": "dev",
   "workspaceFolder": "/workspaces",
-  "remoteUser": "vscode",
+  "remoteUser": "root",
+  "overrideCommand": false,
   "customizations": {
     "vscode": {
       "extensions": [
@@ -16,5 +17,5 @@
       }
     }
   },
-  "postCreateCommand": "bash -c 'git config --global --add safe.directory /workspaces && git config --global user.name \"$(id -un)\" && git config --global user.email \"$(id -un)@thaicom.net\" && uv pip list && python -m pip install --upgrade pip'"
+  "postCreateCommand": "bash -c 'git config --global --add safe.directory /workspaces && uv pip list && python -m pip install --upgrade pip'"
 }
