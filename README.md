@@ -119,18 +119,6 @@ echo "GID=$(id -g)" >> .env
 echo "USER=$(id -un)" >> .env
 ```
 
-🔧 **Then edit `.devcontainer/devcontainer.json`** and replace:
-
-```json
-"remoteUser": "vscode"
-```
-
-with:
-
-```json
-"remoteUser": "Your USER"
-```
-
 ---
 
 ## 🚀 Quick Start (Both Variants)
