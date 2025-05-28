@@ -5,7 +5,7 @@ USER := $(shell id -un)
 
 export UID GID USER
 
-IMAGE_NAME ?= ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.1
+IMAGE_NAME ?= ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.2
 IMAGE_TAG ?= v1
 FULL_IMAGE := $(IMAGE_NAME):$(IMAGE_TAG)
 
@@ -16,6 +16,14 @@ ghcr:
 	@echo "📦 Pulling pre-built image from GHCR..."
 	docker pull $(IMAGE_NAME)
 	@echo "✅ Done. Run 'make shell' to start using it."
+
+# Generates .env file
+gen-env:
+	@echo "UID=$(shell id -u)" > .env
+	@echo "GID=$(shell id -g)" >> .env
+	@echo "USER=$(shell id -un)" >> .env
+	@echo "✅ .env generated with UID=$(UID), GID=$(GID), USER=$(USER)"
+
 
 # Check container status
 status:
@@ -79,7 +87,8 @@ run:
 	docker compose run --rm dev
 
 # Run the container in the background (keeps running until 'down' is executed, suitable for long-running dev environments such as Jupyter, FastAPI, or background systems)
-up:
+up: gen-env
+	@echo "UID=$(UID), GID=$(GID), USER=$(USER)"
 	docker compose up -d
 
 # Stop the background container
