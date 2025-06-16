@@ -30,7 +30,7 @@
     "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh:ro",
     "source=${localEnv:USERPROFILE}/.aws,target=/home/vscode/.aws:ro"
   ],
-  "postStartCommand": "bash -l -c",
+  "postStartCommand": "bash -l",
   "containerEnv": {
     "USER": "${localEnv:USER}",
     "USER_UID": "${localEnv:UID}",
