@@ -21,7 +21,6 @@ This repository provides two separate environments:
 - GDAL 3.11 built from source
 - Ready-to-use DevContainer config for VS Code
 - Multi-stage Docker builds for lean image size
-- CI/CD-ready with GitHub Actions and GHCR
 
 ---
 
@@ -48,9 +47,14 @@ This container includes a full Python virtual environment (via `uv`), GDAL compi
 ## 🏗️ Usage (CPU Image)
 
 ```bash
-docker pull ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.1
+docker pull ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.2
+```
+
+Or run with make:
+
+```bash
 make ghcr
-make shell
+make dev
 ```
 
 [ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base](https://github.com/users/abcdotaom-thaicom/packages/container/package/gip-dev-cpu-base)
@@ -78,9 +82,14 @@ A GPU-accelerated development environment tailored for Geospatial Data Science, 
 ## 🏗️ Usage (GPU Image)
 
 ```bash
-docker pull ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base:v1.0.1
+docker pull ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base:v1.0.2
+```
+
+Or run with make:
+
+```bash
 make ghcr
-make shell
+make dev
 ```
 
 [ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base](https://github.com/users/abcdotaom-thaicom/packages/container/package/gip-dev-gpu-base)
@@ -103,17 +112,36 @@ make shell
 3. Select **"Reopen in Container"**
 4. Use either `cpu-base` or `gpu-base` depending on your setup
 
+💡 **Tip:** Before launching the DevContainer, ensure that the `.env` file is generated to correctly map user permissions inside the container:  
+Run `make gen-env` or manually define:
+
+```bash
+echo "UID=$(id -u)" > .env
+echo "GID=$(id -g)" >> .env
+echo "USER=$(id -un)" >> .env
+```
+
 ---
 
 ## 🚀 Quick Start (Both Variants)
 
 ### 🧰 Without Makefile
 
+Before running Docker Compose, generate the environment file:
+
+```bash
+echo "UID=$(id -u)" > .env
+echo "GID=$(id -g)" >> .env
+echo "USER=$(id -un)" >> .env
+```
+
+Then run the container:
+
 ```bash
 docker compose run --rm dev
 ```
 
-Or run in background:
+Or in the background:
 
 ```bash
 docker compose up -d
@@ -132,9 +160,9 @@ docker compose down
 
 | Command          | Description                                  |
 |------------------|----------------------------------------------|
-| `make shell`     | Temporary container session                  |
+| `make run`       | Temporary container session                  |
 | `make up`        | Start container in background                |
-| `make exec`      | Attach to running container                  |
+| `make shell`      | Attach to running container                  |
 | `make start`     | Build → Run → Attach                         |
 | `make rebuild`   | Rebuild image without cache                  |
 | `make doctor`    | Check environment readiness (Docker, GPU)    |
@@ -172,4 +200,3 @@ docker compose down
 ## 📫 Need Help?
 
 Feel free to [create an issue](https://github.com/abcdotaom-thaicom/gip-devcontainer-template/issues) or ping the maintainer.
-
