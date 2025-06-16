@@ -42,9 +42,6 @@ RUN uv venv /opt/venv && \
 # -------- Stage 2: Runtime --------
 FROM python:3.10-slim
 
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=1000
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install runtime dependencies
@@ -63,17 +60,14 @@ COPY --from=builder /usr/local/lib /usr/local/lib
 COPY --from=builder /usr/local/include /usr/local/include
 RUN ldconfig
 
-# Create non-root user
-RUN groupadd --gid $USER_GID $USERNAME && \
-    useradd --uid $USER_UID --gid $USER_GID --create-home $USERNAME && \
-    mkdir -p /home/$USERNAME/.ssh && chmod 700 /home/$USERNAME/.ssh && \
-    chown -R $USERNAME:$USERNAME /home/$USERNAME
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENV PATH="/opt/venv/bin:/usr/local/bin:/usr/bin:$PATH"
 ENV PYTHONPATH="/opt/venv/lib/python3.10/site-packages"
-ENV HOME=/home/$USERNAME
 
-USER $USERNAME
 WORKDIR /workspaces
 
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["bash"]

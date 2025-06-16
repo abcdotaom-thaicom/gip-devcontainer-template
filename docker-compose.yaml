@@ -8,12 +8,17 @@ services:
         USER_UID: ${UID}
         USER_GID: ${GID}
 
-    image: ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.1
+    image: ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.2
     container_name: gip-dev-${USER}
     # user: "${UID}:${GID}"
     working_dir: /workspaces
+    environment:
+      - USER=${USER}
+      - UID=${UID}
+      - GID=${GID}
     volumes:
       - .:/workspaces
+      - /home/${USER}:/home/${USER}
       - ~/.ssh:/home/${USER}/.ssh:ro
       - /var/run/docker.sock:/var/run/docker.sock
       - /fs1:/workspaces/fs1

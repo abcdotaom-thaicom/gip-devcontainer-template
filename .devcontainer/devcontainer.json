@@ -3,7 +3,8 @@
   "dockerComposeFile": "../docker-compose.yaml",
   "service": "dev",
   "workspaceFolder": "/workspaces",
-  "remoteUser": "vscode",
+  "remoteUser": "root",
+  "overrideCommand": false,
   "customizations": {
     "vscode": {
       "extensions": [
