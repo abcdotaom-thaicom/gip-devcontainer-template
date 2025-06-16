@@ -88,6 +88,7 @@ Or run with make:
 
 ```bash
 make ghcr
+make dev
 ```
 
 [ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base](https://github.com/users/abcdotaom-thaicom/packages/container/package/gip-dev-gpu-base)
@@ -158,10 +159,9 @@ docker compose down
 
 | Command          | Description                                  |
 |------------------|----------------------------------------------|
-| `make gen-env`   | Generate `.env` file for Compose             |
 | `make run`       | Temporary container session                  |
 | `make up`        | Start container in background                |
-| `make shell`     | Attach to running container                  |
+| `make shell`      | Attach to running container                  |
 | `make start`     | Build → Run → Attach                         |
 | `make rebuild`   | Rebuild image without cache                  |
 | `make doctor`    | Check environment readiness (Docker, GPU)    |

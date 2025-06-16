@@ -63,7 +63,7 @@ start:
 dev:
 	@$(MAKE) up
 	@echo "🔁 Container started. Entering container shell..."
-	@$(MAKE) exec
+	@$(MAKE) shell
 
 # Start and use a new container from scratch (build → up → bash)
 restart:

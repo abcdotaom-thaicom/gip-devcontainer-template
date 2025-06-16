@@ -21,7 +21,13 @@ services:
       - /home/${USER}:/home/${USER}
       - ~/.ssh:/home/${USER}/.ssh:ro
       - /var/run/docker.sock:/var/run/docker.sock
-      - /fs5/anawat/sen2cog_poc:/workspaces/data
+      - /fs1:/workspaces/fs1
+      - /fs2:/workspaces/fs2
+      - /fs3:/workspaces/fs3
+      - /fs4:/workspaces/fs4
+      - /fs5:/workspaces/fs5
+      - /fs6:/workspaces/fs6
+      - /fs7:/workspaces/fs7
     command: bash -l
     stdin_open: true
     tty: true

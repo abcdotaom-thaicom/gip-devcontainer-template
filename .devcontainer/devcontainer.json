@@ -13,9 +13,27 @@
       ],
       "settings": {
         "python.defaultInterpreterPath": "/opt/venv/bin/python",
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "python.testing.pytestArgs": [
+          "tests"
+        ],
+        "python.testing.unittestEnabled": true,
+        "python.testing.pytestEnabled": true,
+        "python.testing.nosetestsEnabled": false,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.formatting.provider": "black",
+        "editor.formatOnSave": true
       }
     }
   },
-  "postCreateCommand": "bash -c 'git config --global --add safe.directory /workspaces && uv pip list && python -m pip install --upgrade pip'"
+  "postCreateCommand": "git config --global --add safe.directory /workspaces && git config --global user.name '${USER}' && uv pip list",
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh:ro",
+    "source=${localEnv:USERPROFILE}/.aws,target=/home/vscode/.aws:ro"
+  ],
+  "postStartCommand": "bash -l",
+  "containerEnv": {
+    "USER": "${localEnv:USER}",
+    "USER_UID": "${localEnv:UID}",
+    "USER_GID": "${localEnv:GID}"
+  }
 }
