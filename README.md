@@ -80,7 +80,7 @@ A GPU-accelerated development environment tailored for Geospatial Data Science, 
 ```bash
 docker pull ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base:v1.0.1
 make ghcr
-make shell
+make dev
 ```
 
 [ghcr.io/abcdotaom-thaicom/gip-dev-gpu-base](https://github.com/users/abcdotaom-thaicom/packages/container/package/gip-dev-gpu-base)
@@ -132,9 +132,9 @@ docker compose down
 
 | Command          | Description                                  |
 |------------------|----------------------------------------------|
-| `make shell`     | Temporary container session                  |
+| `make run`       | Temporary container session                  |
 | `make up`        | Start container in background                |
-| `make exec`      | Attach to running container                  |
+| `make shell`      | Attach to running container                  |
 | `make start`     | Build → Run → Attach                         |
 | `make rebuild`   | Rebuild image without cache                  |
 | `make doctor`    | Check environment readiness (Docker, GPU)    |
