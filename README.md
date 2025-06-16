@@ -162,7 +162,7 @@ docker compose down
 |------------------|----------------------------------------------|
 | `make run`       | Temporary container session                  |
 | `make up`        | Start container in background                |
-| `make shell`      | Attach to running container                  |
+| `make shell`     | Attach to running container                  |
 | `make start`     | Build → Run → Attach                         |
 | `make rebuild`   | Rebuild image without cache                  |
 | `make doctor`    | Check environment readiness (Docker, GPU)    |
