@@ -25,6 +25,7 @@
       }
     }
   },
+<<<<<<< HEAD
   "postCreateCommand": "git config --global --add safe.directory /workspaces && git config --global user.name '${USER}' && uv pip list",
   "mounts": [
     "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh:ro",
@@ -37,3 +38,7 @@
     "USER_GID": "${localEnv:GID}"
   }
 }
+=======
+  "postCreateCommand": "bash -c 'git config --global --add safe.directory /workspaces && uv pip list && python -m pip install --upgrade pip'"
+}
+>>>>>>> b2e8ebbc0782ded20d7de0a6935d609db676ca47

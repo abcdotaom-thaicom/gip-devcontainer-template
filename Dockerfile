@@ -40,9 +40,6 @@ RUN uv venv /opt/venv && \
 # -------- Stage 2: Runtime --------
 FROM nvidia/cuda:12.3.2-runtime-ubuntu22.04
 
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=1000
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install runtime dependencies
@@ -65,17 +62,14 @@ RUN ldconfig
 # Setup Python path
 RUN ln -sf /opt/venv/bin/python3 /usr/local/bin/python
 
-# Create user
-RUN groupadd --gid $USER_GID $USERNAME && \
-    useradd --uid $USER_UID --gid $USER_GID --create-home $USERNAME && \
-    mkdir -p /home/$USERNAME/.ssh && chmod 700 /home/$USERNAME/.ssh && \
-    chown -R $USERNAME:$USERNAME /home/$USERNAME
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENV PATH="/opt/venv/bin:$PATH"
 ENV PYTHONPATH="/opt/venv/lib/python3.10/site-packages"
-ENV HOME=/home/$USERNAME
 
-USER $USERNAME
 WORKDIR /workspaces
 
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["bash"]
