@@ -5,7 +5,7 @@ USER := $(shell id -un)
 
 export UID GID USER
 
-IMAGE_NAME ?= ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.2
+IMAGE_NAME ?= ghcr.io/abcdotaom-thaicom/gip-dev-cpu-nappy:v1.0.3
 IMAGE_TAG ?= v1
 FULL_IMAGE := $(IMAGE_NAME):$(IMAGE_TAG)
 
@@ -57,7 +57,7 @@ start:
 		echo "⚙️  Container already running."; \
 	fi
 	@echo "🖥️  Entering shell..."
-	@$(MAKE) exec
+	@$(MAKE) shell
 
 # Start the container and access it (up → bash)
 dev:
@@ -70,7 +70,7 @@ restart:
 	@$(MAKE) rebuild
 	@$(MAKE) up
 	@echo "🔁 Container started. Entering container shell..."
-	@$(MAKE) exec
+	@$(MAKE) shell
 
 # Check if the GPU is available
 check-gpu:

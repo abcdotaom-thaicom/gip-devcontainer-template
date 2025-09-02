@@ -8,8 +8,8 @@ services:
         USER_UID: ${UID}
         USER_GID: ${GID}
 
-    image: ghcr.io/abcdotaom-thaicom/gip-dev-cpu-base:v1.0.2
-    container_name: gip-dev-${USER}
+    image: ghcr.io/abcdotaom-thaicom/gip-dev-cpu-snappy:v1.0.3
+    container_name: gip-dev-snappy
     # user: "${UID}:${GID}"
     working_dir: /workspaces
     environment:

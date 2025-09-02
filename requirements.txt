@@ -1,3 +1,4 @@
 Geopandas
 numpy
 torch
+esa-snappy
